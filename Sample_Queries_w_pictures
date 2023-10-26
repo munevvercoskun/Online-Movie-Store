@@ -1,0 +1,42 @@
+SELECT customer.Name
+  FROM Customer
+  WHERE EXISTS  (SELECT rent.rental_id
+                 FROM Rented, Rent
+                 WHERE rented.rental_id = rent.rental_id AND rented.username = customer.username);
+
+SELECT *
+  FROM Movie
+  MINUS
+  (SELECT *
+    FROM Movie
+    WHERE genre = 'Horror');
+
+SELECT price, 'Purchased price'
+  FROM Purchase
+  UNION SELECT price, 'Rented Price'
+  FROM Rent;
+
+SELECT COUNT (username) FROM Customer;
+
+SELECT SUM (Purchase.price), movie.title
+  FROMPurchase, Purchased, Movie
+  WHERE purchase.purchase_id = purchased.purchase_id ANDMovie.title = purchased.title;
+
+SELECT production_company.movies, movie.release_year
+  FROM movie, sells_rights, production_company
+  WHERE production_company.company_id = sells_rights.company_id AND movie.title = sells_rights.title;
+
+(CREATE VIEW Under_2Hrs AS
+    (SELECT movie.title, movie.duration
+    FROM movie
+    WHERE movie.duration < 120);
+    
+SELECT * FROM Under_2Hrs;)
+
+(REPLACE VIEW Cheap_Movies_to_Buy AS
+    (SELECT purchased.title, purchase.price 
+    FROM purchased, purchase
+    WHERE purchase.purchase_ID = purchased.purchase_ID AND purchase.price < 20);
+     
+SELECT * FROM cheap_movies_to_buy;)
+
