@@ -11,6 +11,7 @@ public class DatabaseConnection {
  } catch (ClassNotFoundException e) {
     return false;
  }
+  
  try {
      connection = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521/XEPDB1", "nabil", "Nabdude24");
      System.out.println("Connected!");
