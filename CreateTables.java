@@ -10,6 +10,7 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.event.*;
 
 
+
 public class CreateTables{
 
     public static void createTable(JFrame f, DatabaseConnection databaseConnection, JButton createBtn) {
